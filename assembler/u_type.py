@@ -10,28 +10,25 @@ def u_to_bin(instruction):
 
     # instruction validation
     if instruction_name not in u_type_info:
-        print("invalid instruction")
-        return
-    
+        raise ValueError("invalid instruction")
+            
     part2=part1[1].split(",")
     rd=part2[0]
     imm=part2[1]
 
     #checking if the register is valid
     if rd not in REGISTER_MAPPING:
-        print("invalid register")
-        return
-    
+        raise ValueError("invalid register")
+            
     #checking if immediate is an integer 
     try:
         int_imm=int(imm)
     except:
-        print("immediate is not a valid integer")
-        return
-    
+        raise ValueError("immediate is not a valid integer")
+            
     #checking if the immediate is in the 20 bit 2's complement range 
     if not (-2**19 <= int_imm <= 2**19 - 1):
-        print("the immediate can't be represented using a 20 bit 2's complement representation")
+        raise ValueError("immediate out of range")
         return
     
      #converting the immediate to 20 bit 2's complement form 
