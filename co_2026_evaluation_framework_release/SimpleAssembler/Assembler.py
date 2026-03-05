@@ -53,7 +53,7 @@ for i in data:
     elif operation in operations[12:14]:
         wdata = u_to_bin(i)
     elif operation in operations[14:20]:
-        wdata = b_to_bin(i)
+        wdata = b_to_bin(i,pc,labels)
     elif operation in operations[20:24]:
         wdata = i_to_bin(i)
     pc+=4

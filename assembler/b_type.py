@@ -1,5 +1,5 @@
 from store import Register_Mapping,B_TYPE
-def b_to_bin(func,r1,r2,off_val,pc,labels):
+def b_type_encoder(func,r1,r2,off_val,pc,labels):
     b_func3=B_TYPE
     opcode="1100011"
     if off_val.lstrip("-").isdigit():
@@ -21,12 +21,12 @@ def b_to_bin(func,r1,r2,off_val,pc,labels):
     r2=Register_Mapping[r2]
     return imm_12+imm10_5+r2+r1+b_func3[func]+imm4_1+imm_11+opcode
 
-def b_type_bin_return(ins,pc,labels):
+def b_to_bin(ins,pc,labels):
     try:
         if ":" in ins:
             ins = ins.split(":")[1].strip()
         ins=ins.replace(",", " ")
         a=ins.split()
-        return b_to_bin(a[0],a[1],a[2],a[3],pc,labels)
+        return b_type_encoder(a[0],a[1],a[2],a[3],pc,labels)
     except:
         raise Exception("There is some error in the instruction passed")
