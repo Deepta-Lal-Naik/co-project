@@ -1,3 +1,4 @@
+from store import Register_Mapping
 with open("data.txt","r") as f:
     l=f.readlines()
 
@@ -19,8 +20,8 @@ def b_type_encoder(func,r1,r2,off_val):
     imm10_5=imm[1:7]
     imm4_1=imm[7:11]
     imm_11=imm[11]
-    r1=format(int(r1[1:]),"05b")
-    r2=format(int(r2[1:]),"05b")
+    r1=Register_Mapping[r1]
+    r2=Register_Mapping[r2]
     return imm_12+imm10_5+r2+r1+b_func3[func]+imm4_1+imm_11+opcode
 
 labels={}#label definition
@@ -34,15 +35,13 @@ for ins in l:
         pc_count+=4
 
 pc=0
-for ins in l:
-    if ":" in ins:
-        ins = ins.split(":")[1].strip()
-    ins=ins.replace(",", " ")
-    a=ins.split()
-    if a[1]=="zero":
-        a[1]="x0"
-    if a[2]=="zero":
-        a[2]="x0"
-    print(b_type_encoder(a[0],a[1],a[2],a[3]))
-    pc+=4
-
+try:
+    for ins in l:
+        if ":" in ins:
+            ins = ins.split(":")[1].strip()
+        ins=ins.replace(",", " ")
+        a=ins.split()
+        print(b_type_encoder(a[0],a[1],a[2],a[3]))
+        pc+=4
+except:
+    print("There is some error in the instruction passed")
