@@ -9,7 +9,7 @@ instr = { "lw" :["010","0000011"], #0-index: funct3,  1-index: opcode
 inp = "addi x5, x3, -1"
 
 #Function to convert immediate value to binary
-def imm_to_bin(imm):
+def imm_to_bin(imm, pc = None, label = None):
     imm = int(imm)
     if imm >= 0:
         return format(imm, "012b")
@@ -17,11 +17,11 @@ def imm_to_bin(imm):
         return format( (1<<12) - abs(imm), "012b")
 
 #Function to convert register value to binary            
-def reg_to_bin(reg):
+def reg_to_bin(reg, pc = None, label = None):
     return format(int(Register_Mapping[reg]), "05b")
           
 #Function to convert instructions to binary     
-def itoBinary(inp):
+def itoBinary(inp, pc = None, label = None):
     cmd = []
     cmd.append(inp.replace(",","").split())
     try:
