@@ -12,7 +12,7 @@ def load():
             for i in L:
                 j = i.replace(",","").split()
                 S.append(j)'''
-        L = "lw x2, 5(x4)"
+        L = "addi x5, x3, -1"
         j = L.replace(",","").split()
         S.append(j)
         print(S)    
@@ -25,14 +25,31 @@ def imm_to_bin(imm):
 #Function to convert register value to binary            
 def reg_to_bin(reg):
     return format(int(reg), "05b")            
+def twoComp(imm):
      
+          
 #Function to convert instructions to binary     
 def toBinary(S):
     for x in S:
         b = instr.get(x[0])
         funct3, opcode = b
 
+        #CHECKS FOR IMM
+        if imm < 0:
+            imm  = twoComp(imm)
+        #elif len(imm) > 12:
+            #      raise error   
+        elif imm == []:
+            print("Syntax error")
+        else:
+             #go to label     
+
+        #CHECKS FOR REG
+        if rs1 == [0]:
+            print("x0 being used to store value!")
+
         if x[0] == "lw":
+
             rd = reg_to_bin(x[1][1:])   
             imm, rs1 = x[2].replace(")", "").split("(") #Removing brackets 
             rs = reg_to_bin(rs1[1:])    
@@ -41,9 +58,11 @@ def toBinary(S):
             rd = reg_to_bin(x[1][1:])
             rs = reg_to_bin(x[2][1:])
             imm = imm_to_bin(x[3])
+    print(imm + rs + funct3 + rd + opcode)
 
-        print(imm + rs + funct3 + rd + opcode)
 toBinary(S)          
+
+
 
                       
                         
