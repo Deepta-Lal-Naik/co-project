@@ -27,7 +27,7 @@ def reg_to_bin(reg):
     return format(int(reg), "05b")            
      
 #Function to convert instructions to binary     
-def toBinary(S):
+def i_to_bin(S):
     for x in S:
         b = instr.get(x[0])
         funct3, opcode = b
@@ -42,8 +42,8 @@ def toBinary(S):
             rs = reg_to_bin(x[2][1:])
             imm = imm_to_bin(x[3])
 
-        print(imm + rs + funct3 + rd + opcode)
-toBinary(S)          
+        return imm + rs + funct3 + rd + opcode
+         
 
                       
                         

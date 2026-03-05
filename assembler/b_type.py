@@ -1,5 +1,5 @@
 from store import Register_Mapping
-def b_type_encoder(func,r1,r2,off_val,pc,labels):
+def b_to_bin(func,r1,r2,off_val,pc,labels):
     b_func3={"beq":"000","bne":"001","blt":"100","bge":"101","bltu":"110","bgeu":"111"}
     opcode="1100011"
     if off_val.lstrip("-").isdigit():

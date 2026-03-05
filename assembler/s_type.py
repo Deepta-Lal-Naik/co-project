@@ -2,7 +2,7 @@ from store import Register_Mapping
 REGISTER_MAPPING = Register_Mapping
 s_type_info={"sw":{"funct3":"010","opcode":"0100011"}}
 
-def s_type(instruction):    
+def s_to_bin(instruction):    
 
     #parsing 
     part1=instruction.split()
