@@ -1,6 +1,6 @@
-from store import Register_Mapping
+from store import Register_Mapping,U_TYPE
 REGISTER_MAPPING = Register_Mapping
-u_type_info={"auipc":{"opcode":"0010111"},"lui":{"opcode":"0110111"}}   
+u_type_info=U_TYPE 
 
 def u_to_bin(instruction):  
 

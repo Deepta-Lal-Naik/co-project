@@ -1,6 +1,6 @@
-from store import Register_Mapping
+from store import Register_Mapping,B_TYPE
 def b_to_bin(func,r1,r2,off_val,pc,labels):
-    b_func3={"beq":"000","bne":"001","blt":"100","bge":"101","bltu":"110","bgeu":"111"}
+    b_func3=B_TYPE
     opcode="1100011"
     if off_val.lstrip("-").isdigit():
         offset=int(off_val)
@@ -27,6 +27,6 @@ def b_type_bin_return(ins,pc,labels):
             ins = ins.split(":")[1].strip()
         ins=ins.replace(",", " ")
         a=ins.split()
-        return b_type_encoder(a[0],a[1],a[2],a[3],pc,labels)
+        return b_to_bin(a[0],a[1],a[2],a[3],pc,labels)
     except:
         raise Exception("There is some error in the instruction passed")

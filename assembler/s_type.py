@@ -1,6 +1,6 @@
-from store import Register_Mapping
+from store import Register_Mapping,S_TYPE
 REGISTER_MAPPING = Register_Mapping
-s_type_info={"sw":{"funct3":"010","opcode":"0100011"}}
+s_type_info=S_TYPE
 
 def s_to_bin(instruction):    
 

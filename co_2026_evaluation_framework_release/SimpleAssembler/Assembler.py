@@ -29,27 +29,36 @@ operations = ["add","sub","sll","slt","sltu","xor","srl","sra","or","and","jal",
               "beq","bne","blt","bge","bltu","bgeu","lw","addi","sltiu","jalr"]
 
 for i in data:
+    i=i.strip()
     temp = i.split(" ")
-    if temp[0] in operations[0:10]:
+    if ":" in i:
+        line_label = temp[0][:-1]
+        operation = temp[1]
+    else:
+        operation = temp[0]
+
+    if operation in operations[0:10]:
         wdata = r_to_bin(i)
 
-    elif temp[0]==operations[10]:
-        label = temp[1].split(",")[1]
-        if label in labels:
-            wdata = j_to_bin(i,pc,labels[label])
+    elif operation==operations[10]:
+        temp1 = i.split()
+        target = temp1[1].split(",")[1]
+        if target in labels:
+            wdata = j_to_bin(i,pc,labels[target])
         else:
-            wdata = j_to_bin(i,int(label))
-    elif temp[0]==operations[11]:
-        wdata = s_to_bin(i)
-    elif temp[0] in operations[12:14]:
-        wdata = u_to_bin(i)
-    elif temp[0] in operations[14:20]:
-        wdata = b_to_bin(i)
-    elif temp[0] in operations[20:24]:
-        wdata = i_to_bin(i)
+            wdata = j_to_bin(i,pc,int(target))
 
-with (output_file,"w") as f:
-    f.write(wdata)
+    elif operation==operations[11]:
+        wdata = s_to_bin(i)
+    elif operation in operations[12:14]:
+        wdata = u_to_bin(i)
+    elif operation in operations[14:20]:
+        wdata = b_to_bin(i)
+    elif operation in operations[20:24]:
+        wdata = i_to_bin(i)
+    pc+=4
+    with open(output_file,"a") as f:
+        f.write(wdata+'\n')
 
     
 

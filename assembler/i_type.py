@@ -1,8 +1,5 @@
-#def itype(command):
-instr = { "lw" :["010","0000011"], #0-index: funct3,  1-index: opcode
-         "addi" :["000","0010011"],
-         "sltiu":["011","0010011"],
-         "jalr" :["000","1100111"]  }
+from store import Register_Mapping,I_type
+instr = I_type
 
 # Load instructions to program
 S = []

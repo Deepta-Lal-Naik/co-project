@@ -11,11 +11,9 @@ def j_to_bin(instruction,pc,label_adrr):
     rd = Register_Mapping[l1[0]]
     offset = label_adrr-pc
     if offset<0:
-        offset=not(offset)
-        offset+=1
+        offset = (1<<20) + offset
     offset = format(offset>>1,"021b")
 
-    print(offset)
     imm20 = offset[0]
     imm10_1 = offset[10:20]
     imm11 = offset[9]
@@ -23,7 +21,7 @@ def j_to_bin(instruction,pc,label_adrr):
 
     return imm20+imm10_1+imm11+imm19_12+rd+"1101111"
 
-def j_to_bin(instruction,imm):
+def j_to_bin_offset(instruction,imm):
 
     l = instruction.split(" ")
     l1 = l[1].split(",")
