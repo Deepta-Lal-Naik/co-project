@@ -25,8 +25,7 @@ with open(data_file,"r") as f:
 pc=0
 labels = createLabels(data)
 operations = ["add","sub","sll","slt","sltu","xor","srl","sra","or","and","jal","sw","auipc","lui"]
-operations = ["add","sub","sll","slt","sltu","xor","srl","sra","or","and","jal","sw","auipc","lui"
-              ]
+
 for i in data:
     temp = i.split(" ")
     if temp[0] in operations[0:10]:
