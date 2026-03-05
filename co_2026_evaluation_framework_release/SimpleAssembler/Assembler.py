@@ -1,6 +1,7 @@
 import sys
 from r_type import r_to_bin
 from j_type import j_to_bin
+
 def createLabels(data):
     d={}
     pc=0
