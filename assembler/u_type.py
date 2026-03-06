@@ -29,8 +29,7 @@ def u_to_bin(instruction):
     #checking if the immediate is in the 20 bit 2's complement range 
     if not (-2**19 <= int_imm <= 2**19 - 1):
         raise ValueError("immediate out of range")
-        return
-    
+            
      #converting the immediate to 20 bit 2's complement form 
     if int_imm>=0:
         imm_binary=(bin(int_imm))[2:]
