@@ -1,25 +1,57 @@
-from store import Register_Mapping,S_Type,twos
+from store import Register_Mapping,S_TYPE
 REGISTER_MAPPING = Register_Mapping
-s_type_info=S_Type
+s_type_info=S_TYPE
 
-def s_to_bin(cmd):
+def s_to_bin(instruction):    
 
-    parts = cmd.split(maxsplit=1)
-    op = parts[0]
-    rest = parts[1]
-    rest = rest.replace(" ", "")
-    rs2,addr = rest.split(",")
+    #parsing 
+    part1=instruction.split()
+    instruction_name = part1[0]
 
-    imm,rs1 = addr.split("(")
-    rs1 = rs1[:-1]
+    # instruction validation
+    if instruction_name not in s_type_info:
+        raise ValueError("invalid instruction")
+    
+    part2=part1[1].split(",")
+    rs2=part2[0]
+    base_offset=part2[1].strip(")").split("(")
+    rs1=base_offset[1]
+    imm=base_offset[0]
+    
+    #checking if the register is valid
+    if rs1 not in REGISTER_MAPPING or rs2 not in REGISTER_MAPPING:
+        raise ValueError("invalid register")
+    
+    #checking if immediate is an integer 
+    try:
+        int_imm=int(imm)
+    except:
+        raise ValueError("immediate is not a valid integer")
+    
+    #checking if the immediate is in the 12 bit 2's complement range 
+    if not (-2048<=int_imm<=2047):
+        raise ValueError("immediate out of range")
+            
+    #converting the immediate to 12 bit 2's complement form 
+    if int_imm>=0:
+        imm_binary=(bin(int_imm))[2:]
+        immediate="0"*(12-len(imm_binary))+imm_binary
+    else:
+        int_imm = 2**12 + int_imm
+        imm_binary=(bin(int_imm))[2:]
+        immediate="0"*(12-len(imm_binary))+imm_binary
 
-    imm = twos(int(imm),12)
+    #splitting the immediate 
+    imm_11_5=immediate[:7]
+    imm_4_0=immediate[7:]
+    
+    #final binary instruction
+    # S-type format: imm[11:5] | rs2 | rs1 | funct3 | imm[4:0] | opcode
+    binary_instruction = imm_11_5 + REGISTER_MAPPING[rs2] + REGISTER_MAPPING[rs1] + s_type_info[instruction_name]["funct3"] + imm_4_0 + s_type_info[instruction_name]["opcode"]
+    return binary_instruction
 
-    return (
-        imm[:7] +
-        Register_Mapping[rs2] +
-        Register_Mapping[rs1] +
-        "010" +
-        imm[7:] +
-        "0100011"
-    )
+
+
+
+
+

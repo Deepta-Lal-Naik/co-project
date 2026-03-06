@@ -1,34 +1,44 @@
-from store import Register_Mapping,twos,I_Type
+from store import Register_Mapping,I_type
+instr = I_type
 
 #Function to convert immediate value to binary
-def i_to_bin(cmd):
-
-    if cmd.startswith("lw"):
-        parts = cmd.split(maxsplit=1)
-        op = parts[0]
-        rest = parts[1]
-        rest = rest.replace(" ", "")
-        rd,addr = rest.split(",")
-        imm,rs1 = addr.split("(")
-        rs1 = rs1[:-1]
-
+def imm_to_bin(imm, pc = None, label = None):
+    imm = int(imm)
+    if imm >= 0:
+        return format(imm, "012b")
     else:
-        parts = cmd.split(maxsplit=1)
-        op = parts[0]
-        rest = parts[1]
-        rest = rest.replace(" ", "")
-        rd,rs1,imm = rest.split(",")
+        return format( (1<<12) - abs(imm), "012b")
 
-    imm = twos(int(imm),12)
+#Function to convert register value to binary            
+def reg_to_bin(reg, pc = None, label = None):
+    return Register_Mapping[reg]
+          
+#Function to convert instructions to binary     
+def i_to_bin(inp, pc = None, label = None):
+    
+    try:
+        x = inp.replace(",", " ").split()
 
-    return (
-        imm +
-        Register_Mapping[rs1] +
-        I_Type[op] +
-        Register_Mapping[rd] +
-        ("0000011" if op=="lw" else "0010011" if op!="jalr" else "1100111")
-    )
+        b = instr.get(x[0])
+        funct3, opcode = b     
 
+        if x[0] == "lw":
+                rd = reg_to_bin(x[1])   
+                imm, rs1 = x[2].replace(")", "").split("(") #Removing brackets 
+                rs = reg_to_bin(rs1)    
+                imm = imm_to_bin(imm)
+        
+        else:
+                rd = reg_to_bin(x[1])
+                rs = reg_to_bin(x[2])
+                imm = imm_to_bin(x[3])
+                
+        return imm + rs + funct3 + rd + opcode
+    except:
+            raise Exception("Invalid assembly command")
+        
+
+                      
                         
 
               
