@@ -6,6 +6,7 @@ def b_type_encoder(func,r1,r2,off_val,pc,labels):
         offset=int(off_val)
     else:
         offset=labels[off_val]-pc
+    offset = offset >> 1
     if offset<0:
         offset=(1<<12)+offset
     imm=format(offset,"012b")
