@@ -11,7 +11,7 @@ def imm_to_bin(imm, pc = None, label = None):
 
 #Function to convert register value to binary            
 def reg_to_bin(reg, pc = None, label = None):
-    return format(int(Register_Mapping[reg]), "05b")
+    return Register_Mapping[reg]
           
 #Function to convert instructions to binary     
 def i_to_bin(inp, pc = None, label = None):
