@@ -5,13 +5,13 @@ s_type_info=S_Type
 def s_to_bin(instruction):    
 
     #parsing 
-    part1=instruction.split()
+    part1=instruction.split(maxsplit=1)
     instruction_name = part1[0]
 
     # instruction validation
 
     
-    part2=part1[1].split(",")
+    part2=part1[1].replace(" ","").split(",")
     rs2=part2[0]
     base_offset=part2[1].strip(")").split("(")
     rs1=base_offset[1]
