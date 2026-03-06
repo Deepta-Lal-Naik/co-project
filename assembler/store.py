@@ -1,6 +1,6 @@
 #R-type
 #funct7,funct3 values in list 
-R_type = {
+R_Type = {
 "add": ["0000000","000"],
 "sub": ["0100000","000"],
 "sll": ["0000000","001"],
@@ -12,9 +12,14 @@ R_type = {
 "and": ["0000000","111"]
 }
 
+def twos(val,bits):
+    if val < 0:
+        val = (1<<bits) + val
+    return format(val,f"0{bits}b")
+
 #I-type
 #funct3,opcode values in list
-I_type = { "lw" :["010","0000011"], #0-index: funct3,  1-index: opcode
+I_Type = { "lw" :["010","0000011"], #0-index: funct3,  1-index: opcode
          "addi" :["000","0010011"],
          "sltiu":["011","0010011"],
          "jalr" :["000","1100111"]  }
@@ -22,26 +27,20 @@ I_type = { "lw" :["010","0000011"], #0-index: funct3,  1-index: opcode
 
 #S-type
 #funct3,opcode values in list
-S_TYPE ={"sw":{"funct3":"010","opcode":"0100011"}}
+S_Type ={"sw":{"funct3":"010","opcode":"0100011"}}
 
 #B-type
 #funct3,opcode values in list
-B_TYPE = {"beq":"000","bne":"001","blt":"100","bge":"101","bltu":"110","bgeu":"111"}
+B_Type = {"beq":"000","bne":"001","blt":"100","bge":"101","bltu":"110","bgeu":"111"}
 
 #U-type
 #opcode as value
-U_TYPE = {"auipc":{"opcode":"0010111"},"lui":{"opcode":"0110111"}}  
-
-#J-type
-#opcode as value
-J_TYPE = {
-"jal": ["1101111"]
-}
+U_Type = {"auipc":{"opcode":"0010111"},"lui":{"opcode":"0110111"}}  
 
 
 
 
-#Registe mapping
+#Register mapping
 
 Register_Mapping = {
 "x0":"00000","zero":"00000",

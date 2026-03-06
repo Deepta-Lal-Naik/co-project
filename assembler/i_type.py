@@ -1,16 +1,15 @@
-from store import Register_Mapping,I_type
-instr = I_type
+from store import Register_Mapping,I_Type
+instr = I_Type
 
 #Function to convert immediate value to binary
-def imm_to_bin(imm, pc = None, label = None):
+def imm_to_bin(imm):
     imm = int(imm)
-    if imm >= 0:
-        return format(imm, "012b")
-    else:
-        return format( (1<<12) - abs(imm), "012b")
+    if imm < 0:
+        imm = (1<<12) + imm
+    return format(imm,"012b") 
 
 #Function to convert register value to binary            
-def reg_to_bin(reg, pc = None, label = None):
+def reg_to_bin(reg):
     return Register_Mapping[reg]
           
 #Function to convert instructions to binary     
@@ -20,6 +19,9 @@ def i_to_bin(inp, pc = None, label = None):
         x = inp.replace(",", " ").split()
 
         b = instr.get(x[0])
+        if b is None:
+             raise Exception()
+        
         funct3, opcode = b     
 
         if x[0] == "lw":
@@ -34,10 +36,9 @@ def i_to_bin(inp, pc = None, label = None):
                 imm = imm_to_bin(x[3])
                 
         return imm + rs + funct3 + rd + opcode
+   
     except:
-            raise Exception("Invalid assembly command")
-        
-
+        raise Exception("Invalid assembly command")
                       
                         
 
