@@ -1,11 +1,12 @@
 import sys
-from assembler.r_type import r_to_bin
-from assembler.j_type import j_to_bin
-from assembler.i_type import i_to_bin
-from assembler.b_type import b_to_bin
-from assembler.u_type import u_to_bin
-from assembler.s_type import s_to_bin
-from assembler.store import I_Type,R_Type,B_Type
+sys.path.append("../../assembler")
+from r_type import r_to_bin
+from j_type import j_to_bin
+from i_type import i_to_bin
+from b_type import b_to_bin
+from u_type import u_to_bin
+from s_type import s_to_bin
+from store import I_Type,R_Type,B_Type
 
 data_file = sys.argv[1]
 out_file = sys.argv[2]
