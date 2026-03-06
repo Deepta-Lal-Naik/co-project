@@ -10,8 +10,8 @@ def r_to_bin(instruction):
         rs2 = Register_Mapping[l1[2]]
         rs1 = Register_Mapping[l1[1]]
         rd = Register_Mapping[l1[0]]
-        funct7 = R_type[l[0]][0]
-        funct3 = R_type[l[0]][1]
+        funct7 = R_type[command][0]
+        funct3 = R_type[command][1]
         opcode = "0110011"
         return funct7+rs2+rs1+funct3+rd+opcode
     

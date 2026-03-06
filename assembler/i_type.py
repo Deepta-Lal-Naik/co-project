@@ -33,7 +33,7 @@ def i_to_bin(inp, pc = None, label = None):
                 rs = reg_to_bin(x[2])
                 imm = imm_to_bin(x[3])
                 
-        print(imm + rs + funct3 + rd + opcode)
+        return imm + rs + funct3 + rd + opcode
     except:
             raise Exception("Invalid assembly command")
         
