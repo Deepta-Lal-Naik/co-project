@@ -14,36 +14,23 @@ R_type = {
 
 #I-type
 #funct3,opcode values in list
-I_type = {
-"addi": ["000","0010011"],
-"lw": ["010","0000011"],
-"sltiu": ["011","0010011"],
-"jalr": ["000","1100111"]
-}
+I_type = { "lw" :["010","0000011"], #0-index: funct3,  1-index: opcode
+         "addi" :["000","0010011"],
+         "sltiu":["011","0010011"],
+         "jalr" :["000","1100111"]  }
+
 
 #S-type
 #funct3,opcode values in list
-S_TYPE = {
-"sw": ["010","0100011"]
-}
+S_TYPE ={"sw":{"funct3":"010","opcode":"0100011"}}
 
 #B-type
 #funct3,opcode values in list
-B_TYPE = {
-"beq": ["000","1100011"],
-"bne": ["001","1100011"],
-"blt": ["100","1100011"],
-"bge": ["101","1100011"],
-"bltu": ["110","1100011"],
-"bgeu": ["111","1100011"]
-}
+B_TYPE = {"beq":"000","bne":"001","blt":"100","bge":"101","bltu":"110","bgeu":"111"}
 
 #U-type
 #opcode as value
-U_TYPE = {
-"lui": "0110111",
-"auipc": "0010111"
-}
+U_TYPE = {"auipc":{"opcode":"0010111"},"lui":{"opcode":"0110111"}}  
 
 #J-type
 #opcode as value

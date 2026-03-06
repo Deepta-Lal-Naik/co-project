@@ -1,12 +1,5 @@
-from store import Register_Mapping
-
-instr = { "lw" :["010","0000011"], #0-index: funct3,  1-index: opcode
-         "addi" :["000","0010011"],
-         "sltiu":["011","0010011"],
-         "jalr" :["000","1100111"]  }
-
-
-inp = "addi x5, x3, -1"
+from store import Register_Mapping,I_type
+instr = I_type
 
 #Function to convert immediate value to binary
 def imm_to_bin(imm, pc = None, label = None):
@@ -21,7 +14,7 @@ def reg_to_bin(reg, pc = None, label = None):
     return format(int(Register_Mapping[reg]), "05b")
           
 #Function to convert instructions to binary     
-def itoBinary(inp, pc = None, label = None):
+def i_to_bin(inp, pc = None, label = None):
     cmd = []
     cmd.append(inp.replace(",","").split())
     try:
@@ -43,7 +36,7 @@ def itoBinary(inp, pc = None, label = None):
         print(imm + rs + funct3 + rd + opcode)
     except:
             raise Exception("Invalid assembly command")
-itoBinary(inp)          
+        
 
                       
                         
