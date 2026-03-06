@@ -17,7 +17,7 @@ def reg_to_bin(reg, pc = None, label = None):
 def i_to_bin(inp, pc = None, label = None):
     
     try:
-        x = inp.replace(",", "").split()
+        x = inp.replace(",", " ").split()
 
         b = instr.get(x[0])
         funct3, opcode = b     
