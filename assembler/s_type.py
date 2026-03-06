@@ -1,38 +1,25 @@
-from store import Register_Mapping,S_Type
+from store import Register_Mapping,S_Type,twos
 REGISTER_MAPPING = Register_Mapping
 s_type_info=S_Type
 
-def s_to_bin(instruction):    
+def s_to_bin(cmd):
 
-    try:
-        #parsing 
-        part1=instruction.split()
-        instruction_name = part1[0]  
-        part2=part1[1].split(",")
-        rs2=part2[0]
-        base_offset=part2[1].strip(")").split("(")
-        rs1=base_offset[1]
-        imm=(base_offset[0]) 
-        int_imm=int(imm) 
-        if int_imm>=0:
-            imm_binary=(bin(int_imm))[2:]
-            immediate="0"*(12-len(imm_binary))+imm_binary
-        else:
-            int_imm = 2**12 + int_imm
-            imm_binary=(bin(int_imm))[2:]
-            immediate="0"*(12-len(imm_binary))+imm_binary
+    parts = cmd.split(maxsplit=1)
+    op = parts[0]
+    rest = parts[1]
+    rest = rest.replace(" ", "")
+    rs2,addr = rest.split(",")
 
-        #splitting the immediate 
-        imm_11_5=immediate[:7]
-        imm_4_0=immediate[7:]
-        
-        #final binary instruction
-        # S-type format: imm[11:5] | rs2 | rs1 | funct3 | imm[4:0] | opcode
-        binary_instruction = imm_11_5 + REGISTER_MAPPING[rs2] + REGISTER_MAPPING[rs1] + s_type_info[instruction_name]["funct3"] + imm_4_0 + s_type_info[instruction_name]["opcode"]
-        return binary_instruction
+    imm,rs1 = addr.split("(")
+    rs1 = rs1[:-1]
 
-    except:
-        raise Exception("Invalid assembly command")
+    imm = twos(int(imm),12)
 
-
-
+    return (
+        imm[:7] +
+        Register_Mapping[rs2] +
+        Register_Mapping[rs1] +
+        "010" +
+        imm[7:] +
+        "0100011"
+    )
