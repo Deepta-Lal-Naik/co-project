@@ -1,4 +1,4 @@
-from store import Register_Mapping,I_type
+from store import Register_Mapping,I_type,twos
 instr = I_type
  
 #Function to convert immediate value to binary
@@ -7,7 +7,8 @@ def imm_to_bin(imm, pc = None, label = None):
     if imm >= 0:
         return format(imm, "012b")
     else:
-        return format( (1<<12) - abs(imm), "012b")
+        ct_twos = twos(int(imm),12)
+        return ct_twos
 
 #Function to convert register value to binary            
 def reg_to_bin(reg, pc = None, label = None):
