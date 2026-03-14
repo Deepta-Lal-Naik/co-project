@@ -6,7 +6,11 @@ def j_to_bin(instruction,pc,labels):
     l1 = l[1].replace(" ","").split(",")
     label=l1[1]
     rd = Register_Mapping[l1[0]]
-    offset = labels[label]-pc
+    if label.isdigit():
+        offset = int(label)
+    else:
+        offset = labels[label]-pc
+        
     offset = twos(offset>>1,20)
 
     imm20 = offset[0]

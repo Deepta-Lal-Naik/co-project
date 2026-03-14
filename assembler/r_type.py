@@ -1,9 +1,9 @@
 from store import R_Type,Register_Mapping
 def r_to_bin(instruction):
   
-        l = instruction.split()
+        l = instruction.split(maxsplit=1)
         command = l[0]
-        l1 = l[1].split(",")
+        l1 = l[1].replace(" ","").split(",")
         rs2 = Register_Mapping[l1[2]]
         rs1 = Register_Mapping[l1[1]]
         rd = Register_Mapping[l1[0]]

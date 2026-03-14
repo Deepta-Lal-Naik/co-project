@@ -5,13 +5,13 @@ s_type_info=S_Type
 def s_to_bin(instruction):    
 
     #parsing 
-    part1=instruction.split()
+    part1=instruction.split(maxsplit=1)
     instruction_name = part1[0]
 
     # instruction validation
 
     
-    part2=part1[1].split(",")
+    part2=part1[1].replace(" ","").split(",")
     rs2=part2[0]
     base_offset=part2[1].strip(")").split("(")
     rs1=base_offset[1]
@@ -39,7 +39,7 @@ def s_to_bin(instruction):
     
     #final binary instruction
     # S-type format: imm[11:5] | rs2 | rs1 | funct3 | imm[4:0] | opcode
-    binary_instruction = imm_11_5 + REGISTER_MAPPING[rs2] + REGISTER_MAPPING[rs1] + s_type_info[instruction_name]["funct3"] + imm_4_0 + s_type_info[instruction_name]["opcode"]
+    binary_instruction = imm_11_5 + Register_Mapping[rs2] + Register_Mapping[rs1] + s_type_info[instruction_name]["funct3"] + imm_4_0 + s_type_info[instruction_name]["opcode"]
     return binary_instruction
 
 
