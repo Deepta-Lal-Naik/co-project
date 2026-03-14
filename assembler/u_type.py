@@ -29,7 +29,7 @@ def u_to_bin(instruction):
         
     #final binary instruction
     # U-type instruction format: imm[31:12] | rd | opcode
-    binary_instruction = immediate + REGISTER_MAPPING[rd] + u_type_info[instruction_name]["opcode"]
+    binary_instruction = immediate + Register_Mapping[rd] + U_Type[instruction_name]["opcode"]
     return binary_instruction
 
 

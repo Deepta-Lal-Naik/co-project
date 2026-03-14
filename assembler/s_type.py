@@ -39,7 +39,7 @@ def s_to_bin(instruction):
     
     #final binary instruction
     # S-type format: imm[11:5] | rs2 | rs1 | funct3 | imm[4:0] | opcode
-    binary_instruction = imm_11_5 + Register_Mapping[rs2] + Register_Mapping[rs1] + s_type_info[instruction_name]["funct3"] + imm_4_0 + s_type_info[instruction_name]["opcode"]
+    binary_instruction = imm_11_5 + Register_Mapping[rs2] + Register_Mapping[rs1] + S_Type[instruction_name]["funct3"] + imm_4_0 + S_Type[instruction_name]["opcode"]
     return binary_instruction
 
 

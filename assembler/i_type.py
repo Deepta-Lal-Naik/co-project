@@ -20,7 +20,7 @@ def i_to_bin(inp, pc = None, label = None):
     
         x = inp.replace(",", " ").split()
 
-        b = instr.get(x[0])
+        b = I_Type.get(x[0])
         funct3, opcode = b     
 
         if x[0] == "lw":
