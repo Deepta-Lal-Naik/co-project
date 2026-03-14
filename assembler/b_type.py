@@ -19,3 +19,14 @@ def b_to_bin(ins,pc,labels):
         ins=ins.replace(",", " ")
         a=ins.split()
         return b_type_encoder(a[0],a[1],a[2],a[3],pc,labels)
+ins = "exit: beq zero,zero,0"
+if ":" in ins:
+    temp =  ins.split(":")
+    last_instruction = temp[1].strip()
+else:
+    pass
+
+
+last_instruction=last_instruction.replace(",", " ")
+a=last_instruction.split()
+print((a[1]=="zero" or a[1]=="x0"))
